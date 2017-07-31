@@ -28,7 +28,7 @@ int main(int argc, char ** argv) {
 	struct linkedList *currentNode;
 	struct linkedList *reverseList;
 	struct linkedList *beginningReverse;
-	struct linkedList *previousNode;
+	struct linkedList *nodeList[LIST_SIZE];
 	int numberofNodes = 0;
 	int i=0;
 
@@ -49,38 +49,22 @@ int main(int argc, char ** argv) {
 	}
 
 	currentNode=beginningList;
-	previousNode=beginningList;
 
-	// Now we find the last node, keeping track of its previous
+	// Now we make an array of every node address
 	while(currentNode->next!=0x0){
-		previousNode=currentNode;
+		nodeList[numberofNodes++]=currentNode;
 		currentNode=currentNode->next;
-		numberofNodes++;
 	}
 
-	// Set up the first node in reverseList
-	reverseList=currentNode;
+    // Set the beginning of the reverse order to the address of the last node
 	beginningReverse=currentNode;
-	reverseList->next=previousNode;
-	reverseList=reverseList->next;
-	currentNode=beginningList;
-	numberofNodes--;
+	reverseList=beginningReverse;
 
-	// Continue going to the end of the linked list and adding
-	// the last node to the reversed list until there are no more
-	// Appears to be in O(n!)...very inefficient
-	while(numberofNodes!=0){
-		for(i=0;i<numberofNodes-1;i++){
-			currentNode = currentNode->next;
-		}
-		reverseList->next=currentNode;
+    // Reverse the order by moving backwards through the array
+	for(i=numberofNodes;i>=0;i--){
+		reverseList->next=nodeList[i-1];
 		reverseList=reverseList->next;
-		currentNode=beginningList;
-		numberofNodes--;
-	}
-
-	// Set the last node to a null address space
-	reverseList->next=0x0;
+	}	
 
 	// Print out the results to prove it works
 	reverseList=beginningReverse;
