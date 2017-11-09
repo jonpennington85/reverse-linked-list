@@ -64,11 +64,11 @@ int main(int argc, char ** argv) {
 	for(i=numberofNodes;i>=0;i--){
 		reverseList->next=nodeList[i-1];
 		reverseList=reverseList->next;
-	}	
+	}
 
 	// Print out the results to prove it works
 	reverseList=beginningReverse;
-	while(reverseList!=0x0){
+	while(reverseList>0x100000000){
 		printf("%d\n",reverseList->number);
 		reverseList=reverseList->next;
 	}
