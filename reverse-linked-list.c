@@ -68,7 +68,7 @@ int main(int argc, char ** argv) {
 
 	// Print out the results to prove it works
 	reverseList=beginningReverse;
-	while(reverseList>0x100000000){
+	while(reverseList>(struct linkedList *)0x100000000){
 		printf("%d\n",reverseList->number);
 		reverseList=reverseList->next;
 	}
